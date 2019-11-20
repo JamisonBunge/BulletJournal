@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { testQuery } from '../Queries/query'
+import { graphql } from 'react-apollo';
 
 let months = [
     { id: 1, "name": "January" },
@@ -78,11 +80,8 @@ class Collection extends Component {
     }
 
 
-    //logEvent(this.state.cells[col][rowId])
 
-    //ThIS IS
     buildHeader() {
-
         console.log(Date())
         let header = [];
         header.push(<th>Day #</th>)
@@ -94,6 +93,8 @@ class Collection extends Component {
     }
 
     render() {
+
+        console.log(this.props)
 
         return (
             <div className="collection">
@@ -138,4 +139,4 @@ class Collection extends Component {
     }
 }
 
-export default Collection;
+export default graphql(testQuery)(Collection);
