@@ -6,7 +6,7 @@ let months = [
     { id: 1, "name": "January" },
     { id: 2, "name": "Febuary" },
     { id: 3, "name": "March" },
-    { id: 4, "name": "Apirl" },
+    { id: 4, "name": "April" },
     { id: 5, "name": "May" },
     { id: 6, "name": "June" },
     { id: 7, "name": "July" },
