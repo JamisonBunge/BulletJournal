@@ -13,69 +13,77 @@ const _ = require('lodash');
 const schema = gql`
 type Query {
 	test: String,
-    getYear(year: String!): String,
-    JournalByYear(year: String!):[DayEntry]
+    journalDataByYear(year: String!):[DayEntry],
+    journalData(year: String, month: String, date: String): [DayEntry]
 },
 type DayEntry {
-    day: String,
+    date: String,
     month: String,
     year: String,
     journalID: String,
     status: String,
     frontEndID: String,
-    date: String,
+    fullDate: String,
 },
 type Journal {
     name: String,
     keys: [String],
 }
 type Mutation {
-  post(name: String!): DayEntry
+  post(name: String!): DayEntry,
+  postRecord(year: String!, month: String!, date: String!, status: String!): DayEntry
 }
 `
 
 const resolvers = {
     Query: {
-        test: () => {
-            console.log("hit")
-            return "something else"
-        },
-        getYear: () => {
-            return "jami"
-            return { "name": "jami" };
-        },
-        JournalByYear: (root, args) => {
-            // dayEntry.find({})
-            //console.log(args.year);
-
-            return DayEntry.find({ year: args.year })
-
-            console.log(DayEntry.find({}));
-            let dayEntry = new DayEntry({
-                day: args.name,
-                month: "12",
-                year: "2019",
-                journalID: "1",
-                status: "1",
-                frontEndID: "row-16-col-12",
-                date: "doesntmatter",
-            });
-            return dayEntry;
+        test: () => { return "hello there :)" },
+        journalDataByYear: (root, args) => { return DayEntry.find({ year: args.year }) },
+        journalData: (roots, args) => {
+            let queryBy = {};
+            if (args.date) queryBy.date = args.date;
+            if (args.month) queryBy.month = args.month;
+            if (args.year) queryBy.year = args.year;
+            return DayEntry.find(queryBy)
         }
     },
     Mutation: {
         post: (root, args) => {
             let dayEntry = new DayEntry({
-                day: args.name,
+                date: args.name,
                 month: "12",
                 year: "2019",
                 journalID: "1",
                 status: "1",
                 frontEndID: "row-16-col-12",
-                date: "doesntmatter",
+                fullDate: "doesntmatter",
             });
-            return dayEntry.save();
+            return dayEntry;
+        },
+        postRecord: (root, args) => {
+
+            let existingRecord = DayEntry.find({ year: args.year, month: args.month, date: args.date })
+
+            //check to see if the record exists already
+            if (existingRecord) { console.log("here") }
+            else { console.log("nope") }
+
+
+
+
+            //temp return
+            let dayEntry = new DayEntry({
+                date: args.name,
+                month: "12",
+                year: "2019",
+                journalID: "1",
+                status: "1",
+                frontEndID: "row-16-col-12",
+                fullDate: "doesntmatter",
+            });
+            return dayEntry;
         }
+
     }
 };
 
@@ -154,16 +162,17 @@ let populateRandomData = () => {
         let random = Math.floor(Math.random() * 3)
 
         let dayEntry = new DayEntry({
-            day: entry.getDay(),
+            date: entry.getDate(),
             month: entry.getMonth() + 1,
             year: entry.getFullYear(),
             journalID: "1",
             status: random,
             frontEndID: `row-${entry.getDay() + 1}-col-${entry.getMonth()}`,
-            date: entry,
+            fullDate: entry,
         });
+        console.log(dayEntry)
         dayEntry.save();
-        console.log(new Date(start))
+        //console.log(new Date(start))
     }
 
 
