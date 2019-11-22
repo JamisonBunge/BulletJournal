@@ -9,18 +9,19 @@ query($lat: String!) {
 }
 `
 
-const testGrabYear = gql`
-query($year: String!) {
-    getYear(year: $year)
-        day
-        month
-        year
-        journalID
-        status
+const fetchJournalData = gql`
+query($year: String!, $journalID: String!) {
+    journalData(year: $year, journalID: $journalID) {
         frontEndID
+        status
+        fullDate
+        year
         date
+        month
+        journalID
     }
 }`
+
 
 const testQuery = gql`
 query {
@@ -42,4 +43,4 @@ mutation($name: String!,$description: String!) {
 }
 `
 
-export { get, testQuery, testMutation, testGrabYear };
+export { get, testQuery, testMutation, fetchJournalData };
