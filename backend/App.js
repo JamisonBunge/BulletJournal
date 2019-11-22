@@ -9,12 +9,14 @@ const DayEntry = require('./Models/DayEntry')
 const Journal = require('./Models/Journal')
 const _ = require('lodash');
 
+//the way the database schema is set up, only one journal can exist right now
+//this is because of full date being a unique key when we need fullDate and journalId to be a composite key
 
 const schema = gql`
 type Query {
 	test: String,
     journalDataByYear(year: String!):[DayEntry],
-    journalData(year: String, month: String, date: String): [DayEntry]
+    journalData(year: String, month: String, date: String, journalID: String!): [DayEntry]
 },
 type DayEntry {
     date: String,
@@ -30,8 +32,8 @@ type Journal {
     keys: [String],
 }
 type Mutation {
-  post(name: String!): DayEntry,
-  postRecord(year: String!, month: String!, date: String!, status: String!): DayEntry
+  postRecord(year: String!, month: String!,
+             date: String!, status: String!, journalID: String!): DayEntry
 }
 `
 
@@ -40,7 +42,7 @@ const resolvers = {
         test: () => { return "hello there :)" },
         journalDataByYear: (root, args) => { return DayEntry.find({ year: args.year }) },
         journalData: (roots, args) => {
-            let queryBy = {};
+            let queryBy = { journalID: args.journalID };
             if (args.date) queryBy.date = args.date;
             if (args.month) queryBy.month = args.month;
             if (args.year) queryBy.year = args.year;
@@ -48,40 +50,18 @@ const resolvers = {
         }
     },
     Mutation: {
-        post: (root, args) => {
-            let dayEntry = new DayEntry({
-                date: args.name,
-                month: "12",
-                year: "2019",
-                journalID: "1",
-                status: "1",
-                frontEndID: "row-16-col-12",
-                fullDate: "doesntmatter",
-            });
-            return dayEntry;
-        },
         postRecord: (root, args) => {
 
-            let existingRecord = DayEntry.find({ year: args.year, month: args.month, date: args.date })
+            let query = { year: args.year, month: args.month, date: args.date, journalID: args.journalID };
+            let update = {
+                status: args.status, frontEndID: `row-${args.date}-col-${args.month}`,
+                fullDate: new Date(`${args.month}/${args.date}/${args.year}`)
+            }
 
-            //check to see if the record exists already
-            if (existingRecord) { console.log("here") }
-            else { console.log("nope") }
-
-
-
-
-            //temp return
-            let dayEntry = new DayEntry({
-                date: args.name,
-                month: "12",
-                year: "2019",
-                journalID: "1",
-                status: "1",
-                frontEndID: "row-16-col-12",
-                fullDate: "doesntmatter",
+            return DayEntry.findOneAndUpdate(query, update, {
+                new: true,
+                upsert: true // Make this update into an upsert
             });
-            return dayEntry;
         }
 
     }
@@ -167,7 +147,7 @@ let populateRandomData = () => {
             year: entry.getFullYear(),
             journalID: "1",
             status: random,
-            frontEndID: `row-${entry.getDay() + 1}-col-${entry.getMonth()}`,
+            frontEndID: `row-${entry.getDate()}-col-${entry.getMonth()}`,
             fullDate: entry,
         });
         console.log(dayEntry)

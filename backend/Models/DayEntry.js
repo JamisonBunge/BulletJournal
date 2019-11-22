@@ -12,7 +12,7 @@ const dayEntrySchema = new Schema({
     journalID: String,
     status: String,
     frontEndID: String,
-    fullDate: String,
+    fullDate: String
 });
 
 module.exports = mongoose.model('DayEntry', dayEntrySchema)

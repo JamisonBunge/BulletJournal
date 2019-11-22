@@ -1,0 +1,24 @@
+{
+  journalData(year:"2020",month:"12",date:"16",journalID:"1") {
+    frontEndID
+    status
+    fullDate
+    year
+    date
+    month
+    journalID
+  }
+}
+
+
+mutation {
+  postRecord(year: "2020",month: "12", date:"16",status: "0", journalID:"1") {
+    frontEndID
+    status
+    fullDate
+    year
+    date
+    month
+    journalID
+  }
+}
