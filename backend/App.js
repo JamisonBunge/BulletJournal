@@ -42,6 +42,7 @@ const resolvers = {
         test: () => { return "hello there :)" },
         journalDataByYear: (root, args) => { return DayEntry.find({ year: args.year }) },
         journalData: (roots, args) => {
+            console.log("here")
             let queryBy = { journalID: args.journalID };
             if (args.date) queryBy.date = args.date;
             if (args.month) queryBy.month = args.month;
@@ -147,7 +148,7 @@ let populateRandomData = () => {
             year: entry.getFullYear(),
             journalID: "1",
             status: random,
-            frontEndID: `row-${entry.getDate()}-col-${entry.getMonth()}`,
+            frontEndID: `row-${entry.getDate()}-col-${entry.getMonth() + 1}`,
             fullDate: entry,
         });
         console.log(dayEntry)
