@@ -42,7 +42,7 @@ const resolvers = {
         test: () => { return "hello there :)" },
         journalDataByYear: (root, args) => { return DayEntry.find({ year: args.year }) },
         journalData: (roots, args) => {
-            console.log("here")
+            console.log("jd")
             let queryBy = { journalID: args.journalID };
             if (args.date) queryBy.date = args.date;
             if (args.month) queryBy.month = args.month;
@@ -58,7 +58,8 @@ const resolvers = {
                 status: args.status, frontEndID: `row-${args.date}-col-${args.month}`,
                 fullDate: new Date(`${args.month}/${args.date}/${args.year}`)
             }
-
+            console.log("LALALA")
+            console.log(args)
             return DayEntry.findOneAndUpdate(query, update, {
                 new: true,
                 upsert: true // Make this update into an upsert

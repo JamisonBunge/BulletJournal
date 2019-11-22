@@ -29,18 +29,17 @@ query {
 }`
 
 
-const testMutation = gql`
-mutation($name: String!,$description: String!) {
-  post(name: $name,description: $description) {
-    day
-    month
-    year
-    journalID
-    status
-    frontEndID
-    date
+const updateRecord = gql`
+mutation($year: String!, $month: String!, $date: String!, $status: String!, $journalID: String!) {
+    postRecord(year: $year, month: $month, date: $date, status: $status, journalID: $journalID)  {
+        month
+        year
+        journalID
+        status
+        frontEndID
+        date
     }
 }
 `
 
-export { get, testQuery, testMutation, fetchJournalData };
+export { get, testQuery, updateRecord, fetchJournalData };

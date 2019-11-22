@@ -37,3 +37,9 @@ code {
 .green {
    background: rgb(188, 252, 175);
 }
+.Cell {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
