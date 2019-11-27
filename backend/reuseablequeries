@@ -22,3 +22,14 @@ mutation {
     journalID
   }
 }
+
+mutation {
+  postJournal(userID: "1", journalID:"2", name:"dummy",
+    keys:["Wasn't Tracked","Doesn't Apply","Missed","Did Something", "Significant Day", "Great Day"]){
+    createdOn
+    name
+    keys
+    journalID
+    userID
+  }
+}

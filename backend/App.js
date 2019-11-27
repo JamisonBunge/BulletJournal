@@ -16,7 +16,8 @@ const schema = gql`
 type Query {
 	test: String,
     journalDataByYear(year: String!):[DayEntry],
-    journalData(year: String, month: String, date: String, journalID: String!): [DayEntry]
+    journalData(year: String, month: String, date: String, journalID: String!): [DayEntry],
+    journalsFor(userID: String!): [Journal]
 },
 type DayEntry {
     date: String,
@@ -30,10 +31,15 @@ type DayEntry {
 type Journal {
     name: String,
     keys: [String],
+    createdOn: String,
+    userID: String,
+    journalID: String
+
 }
 type Mutation {
-  postRecord(year: String!, month: String!,
-             date: String!, status: String!, journalID: String!): DayEntry
+    postRecord(year: String!, month: String!,
+             date: String!, status: String!, journalID: String!): DayEntry,
+    postJournal(journalID: String!, keys: [String]!, userID: String!, name: String!): Journal
 }
 `
 
@@ -42,12 +48,19 @@ const resolvers = {
         test: () => { return "hello there :)" },
         journalDataByYear: (root, args) => { return DayEntry.find({ year: args.year }) },
         journalData: (roots, args) => {
-            console.log("jd")
+            //console.log("jd")
             let queryBy = { journalID: args.journalID };
             if (args.date) queryBy.date = args.date;
             if (args.month) queryBy.month = args.month;
             if (args.year) queryBy.year = args.year;
             return DayEntry.find(queryBy)
+        },
+        journalsFor: (root, args) => {
+            let query = { userID: args.userID }
+            //console.log(Journal.find({ userID: args.userID }))
+            return Journal.find(query, function (err, docs) {
+                console.log(docs);
+            });
         }
     },
     Mutation: {
@@ -58,14 +71,29 @@ const resolvers = {
                 status: args.status, frontEndID: `row-${args.date}-col-${args.month}`,
                 fullDate: new Date(`${args.month}/${args.date}/${args.year}`)
             }
-            console.log("LALALA")
-            console.log(args)
+            //console.log("LALALA")
+            //console.log(args)
             return DayEntry.findOneAndUpdate(query, update, {
                 new: true,
                 upsert: true // Make this update into an upsert
             });
-        }
+        },
+        postJournal: (root, args) => {
 
+            //maybe make some changes
+            //so that it checks to make sure journalID/name is not already taken
+
+
+            let journal = new Journal({
+                journalID: args.journalID,
+                keys: args.keys,
+                userID: args.userID,
+                createdOn: String(new Date),
+                name: args.name
+            });
+            return journal.save();
+
+        }
     }
 };
 

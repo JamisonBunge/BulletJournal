@@ -6,9 +6,11 @@ const journalSchema = new Schema({
     //pass through an object that desrcribes how the data will be stored
 
     //ID is done by atlas
-    Day: String,
     name: String,
     keys: [String],
+    userID: String,
+    createdOn: String,
+    journalID: String
     //we dont need to declare ID and author ID because mongoDB will crease these
     //by itself
     //this is about telling the DB what info is being sored
