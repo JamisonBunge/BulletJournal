@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Collection from '../Components/Collection'
+import YearCollection from '../Components/YearCollection'
 
 class Page extends Component {
 
@@ -10,7 +11,8 @@ class Page extends Component {
     render() {
         return (
             <div>
-                <Collection journalID={this.props.journalID} />
+                {/* <Collection journalID={this.props.journalID} /> */}
+                <YearCollection journalID={this.props.journalID} keys={6} />
             </div>
         )
     }

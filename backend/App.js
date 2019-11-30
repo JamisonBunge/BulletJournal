@@ -71,7 +71,9 @@ const resolvers = {
                 fullDate: new Date(`${args.month}/${args.date}/${args.year}`)
             }
             //console.log("LALALA")
-            //console.log(args)
+            console.log(query)
+            console.log(update)
+            console.log("\n\n")
             return DayEntry.findOneAndUpdate(query, update, {
                 new: true,
                 upsert: true // Make this update into an upsert

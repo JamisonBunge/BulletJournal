@@ -69,9 +69,6 @@ class Collection extends Component {
         }
     }
 
-
-
-
     buildRow(rowId) {
 
         let cells = []
@@ -85,15 +82,20 @@ class Collection extends Component {
 
             let tableCell;
 
+            let dateforCell = new Date(`${col}/${rowId}/${this.state.year}`)
+
             if (!cellData) {
                 console.log(`row-${rowId}-col-${col}`)
                 tableCell = <td id={`row-${rowId}-col-${col}`}
-                    className={`rowNum-${rowId % 2}`}></td>
+                    className={`rowNum-${rowId % 2}`}>
+                    <Cell info={cellData} fullDate={dateforCell} />
+                </td>
+
             } else
 
                 tableCell = <td id={`row-${rowId}-col-${col}`}
                     className={`rowNum-${rowId % 2}`}>
-                    <Cell info={cellData} />
+                    <Cell info={cellData} fullDate={dateforCell} />
                 </td>
 
 

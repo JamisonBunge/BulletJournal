@@ -15,7 +15,7 @@ class Wrapper extends Component {
     }
 
     chooseJournal(e) {
-
+        e.preventDefault();
         console.log(e.target.id)
         this.setState({ journalID: e.target.id })
 
