@@ -57,12 +57,15 @@ class Cell extends Component {
         })
     }
 
-    componentWillReceiveProps() {
+    componentWillReceiveProps(nextProps) {
         // console.log("componentDidUpdate");
         // console.log(this.state)
+        //console.log(nextProps)
+        //console.log("componentwillrecprops")
+
         // console.log(this.props)
 
-        let status = this.props.info.status
+        let status = nextProps.info.status
         this.setState({ status: status, color: { background: getColor(status) } })
 
     }

@@ -33,6 +33,11 @@ class YearCollection extends Component {
 
     buildTable() {
 
+        console.log("table sees this as the journal id ")
+        //console.log(this.props.journalID)
+        let data = this.props.data.journalData;
+        console.log("this is what i see for data!")
+        // console.log(data)
         //this is a list of all the dates in this grid that will never exist,
         //we want to check if it's a leap year, if it isn't, then we need to add another date to black out
         let blackOut = ['row-31-col-4', 'row-31-col-6', 'row-31-col-9', 'row-31-col-11', 'row-30-col-2', 'row-31-col-2'];
@@ -51,6 +56,7 @@ class YearCollection extends Component {
                 let frontEndID = `row-${rowId}-col-${col}`
                 let dateForCell = new Date(`${col}/${rowId}/${this.state.year}`)
                 let cellData = data.find((obj) => { return obj.frontEndID == frontEndID })
+                // console.log(cellData)
                 let tableCell;
 
                 let info = {
@@ -107,16 +113,24 @@ class YearCollection extends Component {
         if (data.loading === true) {
             return (<div><p>Loading...</p></div>)
         } else {
-            console.log("did we remount")
+            console.log("===============================================")
 
             return (
                 <div className="collection">
+                    <h1>{this.props.journalID}</h1>
                     <table id="grid">
                         <tbody>{this.buildTable()}</tbody>
                     </table>
                 </div>
             )
         }
+    }
+
+    componentDidMount() {
+        console.log("didmount")
+    }
+    componentDidUpdate() {
+        console.log("didupdate")
     }
 
 }
