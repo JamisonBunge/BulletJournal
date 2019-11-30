@@ -33,3 +33,12 @@ mutation {
     userID
   }
 }
+
+{
+	journalsFor(userID:"1") {
+    createdOn
+    name
+    journalID
+    userID
+  }
+}

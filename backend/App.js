@@ -11,7 +11,7 @@ const _ = require('lodash');
 
 //the way the database schema is set up, only one journal can exist right now
 //this is because of full date being a unique key when we need fullDate and journalId to be a composite key
-
+//this journalsfor needs to return a regular object not an array
 const schema = gql`
 type Query {
 	test: String,
@@ -57,7 +57,6 @@ const resolvers = {
         },
         journalsFor: (root, args) => {
             let query = { userID: args.userID }
-            //console.log(Journal.find({ userID: args.userID }))
             return Journal.find(query, function (err, docs) {
                 console.log(docs);
             });
@@ -175,7 +174,7 @@ let populateRandomData = () => {
             date: entry.getDate(),
             month: entry.getMonth() + 1,
             year: entry.getFullYear(),
-            journalID: "1",
+            journalID: "51",
             status: random,
             frontEndID: `row-${entry.getDate()}-col-${entry.getMonth() + 1}`,
             fullDate: entry,

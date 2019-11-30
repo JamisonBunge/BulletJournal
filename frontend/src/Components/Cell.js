@@ -2,9 +2,8 @@ import React, { Component } from 'react'
 import { graphql, Mutation } from 'react-apollo'
 import { updateRecord } from '../Queries/query'
 import { get } from 'http';
+
 let colors = ["lightgray", "pink", "lime"]
-
-
 let getColor = (val) => {
     return colors[val];
 }
@@ -14,8 +13,6 @@ class Cell extends Component {
         super(props);
 
         let status = this.props.info.status
-
-
         this.state = {
             info: this.props.info,
             status: this.props.info.status,
@@ -47,15 +44,13 @@ class Cell extends Component {
                 status: (x).toString(),
                 journalID: info.journalID
             }
+            //NOTE: after adding this we want to tell apollo to reefatch queries
+            //refetchQueries: [{query: getBooksQuery}]
         })
-
-        //NOTE: after adding this we want to tell apollo to reefatch queries
-        //refetchQueries: [{query: getBooksQuery}]
     }
 
     render() {
         return (<div style={this.state.color} className="Cell" onClick={this.handleClick}>{this.state.status}</div>)
     }
 }
-
 export default graphql(updateRecord, { name: "updateRecord" })(Cell);

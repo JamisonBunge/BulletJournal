@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { ApolloProvider } from 'react-apollo'
 import ApolloClient from 'apollo-boost';
 import './index.css';
-import Collection from './Components/Collection'
+import Wrapper from './Components/Wrapper'
 
 
 const client = new ApolloClient({
@@ -28,26 +28,13 @@ class App extends Component {
         }
     }
 
-    // componentDidMount() {
-    //     let blackOut = ['row-31-col-4', 'row-31-col-6', 'row-31-col-9', 'row-31-col-11', 'row-30-col-2', 'row-31-col-2'];
-    //     let year = this.state.year;
-    //     if (!(year % 100 === 0 ? year % 400 === 0 : year % 4 === 0)) blackOut.push('row-29-col-2');
-
-    //     for (let day of blackOut) {
-    //         let cell = document.getElementById(day);
-    //         cell.classList.add("black");
-    //         //  console.log(cell);
-    //         // console.log(this.state);
-    //     }
-    // }
-
     render() {
 
         return (
             <ApolloProvider client={client}>
                 <div className="App" >
-                    <button type="input" onClick={setValue}>######################</button>
-                    <Collection />
+                    {/* <button type="input" onClick={setValue}>######################</button> */}
+                    <Wrapper />
                 </div>
             </ApolloProvider>
         );

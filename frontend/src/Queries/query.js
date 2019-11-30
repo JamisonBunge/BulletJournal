@@ -22,6 +22,17 @@ query($year: String!, $journalID: String!) {
     }
 }`
 
+const fetchJournalsByUser = gql`
+query($userID: String!) {
+    journalsFor(userID: $userID) {
+        createdOn
+        name
+        journalID
+        userID
+    }
+}`
+
+
 
 const testQuery = gql`
 query {
@@ -42,4 +53,4 @@ mutation($year: String!, $month: String!, $date: String!, $status: String!, $jou
 }
 `
 
-export { get, testQuery, updateRecord, fetchJournalData };
+export { get, testQuery, updateRecord, fetchJournalData, fetchJournalsByUser };

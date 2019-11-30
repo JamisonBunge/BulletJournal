@@ -177,7 +177,7 @@ export default graphql(fetchJournalData, {
         return {
             variables: {
                 year: ((new Date).getFullYear()).toString(),
-                journalID: "1"
+                journalID: props.journalID.toString()
             }
         }
     }
