@@ -9,6 +9,7 @@ class Page extends Component {
     }
 
     render() {
+        console.log("page-rerendered")
         return (
             <div>
                 {/* <Collection journalID={this.props.journalID} /> */}

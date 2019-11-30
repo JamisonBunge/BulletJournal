@@ -1,12 +1,30 @@
 import React, { Component } from 'react';
 import { ApolloProvider } from 'react-apollo'
-import ApolloClient from 'apollo-boost';
+import { InMemoryCache } from 'apollo-cache-inmemory';
 import './index.css';
 import Wrapper from './Components/Wrapper'
+import { HttpLink } from 'apollo-link-http';
+import { ApolloClient } from 'apollo-client';
 
+const defaultOptions = {
+    watchQuery: {
+        fetchPolicy: 'no-cache',
+        errorPolicy: 'ignore',
+    },
+    query: {
+        fetchPolicy: 'no-cache',
+        errorPolicy: 'all',
+    },
+}
+
+const link = new HttpLink({
+    uri: 'http://localhost:5001/graphql',
+});
 
 const client = new ApolloClient({
-    uri: 'http://localhost:5001/graphql', // Endpoint that we are making request queries to.
+    link: link,
+    cache: new InMemoryCache(),
+    defaultOptions: defaultOptions,
 });
 
 

@@ -9,7 +9,7 @@ class Wrapper extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            journalID: 1
+            journalID: "1"
         }
         this.chooseJournal = this.chooseJournal.bind(this);
     }
@@ -17,7 +17,11 @@ class Wrapper extends Component {
     chooseJournal(e) {
         e.preventDefault();
         console.log(e.target.id)
-        this.setState({ journalID: e.target.id })
+
+        if (this.state.journalID != e.target.id) {
+            this.setState({ journalID: e.target.id })
+        }
+
 
         // if (this.state.journalID == undefined) {
 
@@ -39,14 +43,14 @@ class Wrapper extends Component {
     render() {
         let data = this.props.data;
 
-        console.log(data)
+        //console.log(data)
         if (!data.journalsFor) {
             return (<div>loading..</div>)
 
         } else {
 
 
-            console.log("i hate mself")
+            console.log("wrapper re-rendered")
             return (
                 <div>
                     <div className="sidebar">
@@ -65,7 +69,7 @@ class Wrapper extends Component {
 //export default Wrapper
 export default graphql(fetchJournalsByUser, {
     options: (props) => {
-        console.log(props);
+        //console.log(props);
         return {
             variables: {
                 userID: "1"

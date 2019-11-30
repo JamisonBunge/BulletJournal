@@ -61,7 +61,7 @@ class Cell extends Component {
         // console.log("componentDidUpdate");
         // console.log(this.state)
         //console.log(nextProps)
-        //console.log("componentwillrecprops")
+        console.log("componentwillrecprops")
 
         // console.log(this.props)
 

@@ -125,7 +125,9 @@ class YearCollection extends Component {
             )
         }
     }
-
+    setTimeout() {
+        this.props.refetch();
+    }
     componentDidMount() {
         console.log("didmount")
     }
@@ -137,7 +139,8 @@ class YearCollection extends Component {
 
 export default graphql(fetchJournalData, {
     options: (props) => {
-        console.log(props);
+
+        console.log("how often does this happen!!!!!!!!!!!!!!!!")
         return {
             variables: {
                 year: ((new Date).getFullYear()).toString(),

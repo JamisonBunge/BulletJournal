@@ -48,7 +48,8 @@ const resolvers = {
         test: () => { return "hello there :)" },
         journalDataByYear: (root, args) => { return DayEntry.find({ year: args.year }) },
         journalData: (roots, args) => {
-            //console.log("jd")
+            console.log("hi")
+            console.log(args.journalID)
             let queryBy = { journalID: args.journalID };
             if (args.date) queryBy.date = args.date;
             if (args.month) queryBy.month = args.month;
