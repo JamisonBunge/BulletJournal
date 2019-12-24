@@ -76,7 +76,7 @@ class AddJournal extends Component {
         console.log(e.target.form[0].value)
         console.log(this.props.userID)
 
-        this.props.postJournal({
+        let x = this.props.postJournal({
             variables: {
                 name: name.toString(),
                 keys: keys,
@@ -84,6 +84,10 @@ class AddJournal extends Component {
                 userID: userID.toString(),
             }
         })
+
+        console.log(x);
+
+        // this.props.AddJournal({ journalID: })
 
         this.props.closePopup();
     }

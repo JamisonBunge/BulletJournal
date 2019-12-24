@@ -93,8 +93,8 @@ code {
   color:rgb(37, 37, 37);
   position: absolute;
   left: 50%;
-  top: 25%;
-  transform: translate(-50%, -50%);
+  top: 20%;
+  transform: translate(-50%, 0%);
 }
 
 .listJournals ul {

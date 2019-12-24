@@ -9,9 +9,11 @@ class Wrapper extends Component {
 
     constructor(props) {
         super(props);
+        console.log(this.props)
         this.state = {
             _id: "",
             showPopUp: false
+
         }
         this.chooseJournal = this.chooseJournal.bind(this);
     }
@@ -20,7 +22,9 @@ class Wrapper extends Component {
         this.setState({
             showPopup: !this.state.showPopup
         });
+        this.props.data.refetch();
     }
+
 
     chooseJournal(e) {
         e.preventDefault();
@@ -45,6 +49,7 @@ class Wrapper extends Component {
         for (let journal of data.journalsFor) {
             journals.push(<li id={journal._id} onClick={this.chooseJournal}> {journal.name}  </li>)
         }
+
         return journals
 
     }
@@ -59,6 +64,7 @@ class Wrapper extends Component {
 
     render() {
         let data = this.props.data;
+        console.log(this.props)
 
         console.log(data)
         if (!data.journalsFor) {
