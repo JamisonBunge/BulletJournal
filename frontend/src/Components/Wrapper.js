@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Collection from '../Components/Collection'
+import AddJournal from '../Components/AddJournal'
 import Page from '../Components/Page'
 import { fetchJournalsByUser } from '../Queries/query'
 import { graphql } from 'react-apollo';
@@ -9,9 +10,16 @@ class Wrapper extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            journalID: "1"
+            journalID: "1",
+            showPopUp: false
         }
         this.chooseJournal = this.chooseJournal.bind(this);
+    }
+
+    togglePopup() {
+        this.setState({
+            showPopup: !this.state.showPopup
+        });
     }
 
     chooseJournal(e) {
@@ -40,6 +48,15 @@ class Wrapper extends Component {
         return journals
 
     }
+
+    //we back baby
+    handleClickAdd(e) {
+        e.preventDefault();
+
+
+
+    }
+
     render() {
         let data = this.props.data;
 
@@ -55,12 +72,20 @@ class Wrapper extends Component {
                 <div>
                     <div className="sidebar">
                         <div className="userCircle">Jami</div>
-                        <div className="addJournal" onClick={alert}>+</div>
+                        <div className="addJournal" onClick={this.togglePopup.bind(this)}>+</div>
                         <div className="listJournals"><ul>{this.createJournalList()}</ul></div>
                     </div>
                     <div className="page">
                         <Page journalID={this.state.journalID} />
                     </div>
+
+                    {this.state.showPopup ?
+                        <AddJournal
+                            text='if i want to pass something down later'
+                            closePopup={this.togglePopup.bind(this)}
+                        />
+                        : null
+                    }
                 </div>
             )
         }
