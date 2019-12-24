@@ -30,16 +30,18 @@ type DayEntry {
 },
 type Journal {
     name: String,
+    _id: ID,
     keys: [String],
+    colors: [String]
     createdOn: String,
     userID: String,
     journalID: String
-
 }
 type Mutation {
     postRecord(year: String!, month: String!,
              date: String!, status: String!, journalID: String!): DayEntry,
-    postJournal(journalID: String!, keys: [String]!, userID: String!, name: String!): Journal
+    postJournal(journalID: String!, keys: [String]!, userID: String!, name: String!): Journal,
+    postJournalNew(userID: String, keys: [String], colors: [String],  name: String): Journal
 }
 `
 
@@ -60,6 +62,8 @@ const resolvers = {
             let query = { userID: args.userID }
             return Journal.find(query, function (err, docs) {
                 console.log(docs);
+                console.log(docs._id)
+
             });
         }
     },
@@ -85,9 +89,10 @@ const resolvers = {
             //maybe make some changes
             //so that it checks to make sure journalID/name is not already taken
 
-
             let journal = new Journal({
+                //DEPRICATED >>
                 journalID: args.journalID,
+                // <<
                 keys: args.keys,
                 userID: args.userID,
                 createdOn: String(new Date),
@@ -95,6 +100,18 @@ const resolvers = {
             });
             return journal.save();
 
+        },
+        postJournalNew: (root, args) => {
+
+            let journal = new Journal({
+                keys: args.keys,
+                colors: args.colors,
+                _id: mongoose.Types.ObjectId(),
+                userID: args.userID,
+                createdOn: String(new Date),
+                name: args.name
+            });
+            return journal.save();
         }
     }
 };

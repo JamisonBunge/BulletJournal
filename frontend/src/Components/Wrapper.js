@@ -10,7 +10,7 @@ class Wrapper extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            journalID: "1",
+            _id: "",
             showPopUp: false
         }
         this.chooseJournal = this.chooseJournal.bind(this);
@@ -26,8 +26,8 @@ class Wrapper extends Component {
         e.preventDefault();
         console.log(e.target.id)
 
-        if (this.state.journalID != e.target.id) {
-            this.setState({ journalID: e.target.id })
+        if (this.state._id != e.target.id) {
+            this.setState({ _id: e.target.id })
         }
 
 
@@ -43,7 +43,7 @@ class Wrapper extends Component {
         let journals = []
 
         for (let journal of data.journalsFor) {
-            journals.push(<li id={journal.journalID} onClick={this.chooseJournal}> {journal.name}  </li>)
+            journals.push(<li id={journal._id} onClick={this.chooseJournal}> {journal.name}  </li>)
         }
         return journals
 
@@ -60,7 +60,7 @@ class Wrapper extends Component {
     render() {
         let data = this.props.data;
 
-        //console.log(data)
+        console.log(data)
         if (!data.journalsFor) {
             return (<div>loading..</div>)
 
@@ -76,12 +76,17 @@ class Wrapper extends Component {
                         <div className="listJournals"><ul>{this.createJournalList()}</ul></div>
                     </div>
                     <div className="page">
-                        <Page journalID={this.state.journalID} />
+                        {
+                            this.state._id == "" ?
+                                <h1>Click a jounral </h1>
+                                : <Page journalID={this.state._id} />
+                        }
                     </div>
 
                     {this.state.showPopup ?
                         <AddJournal
                             text='if i want to pass something down later'
+                            userID="1"
                             closePopup={this.togglePopup.bind(this)}
                         />
                         : null

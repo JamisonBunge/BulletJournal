@@ -28,6 +28,7 @@ query($userID: String!) {
         createdOn
         name
         journalID
+        _id
         userID
     }
 }`
@@ -53,4 +54,16 @@ mutation($year: String!, $month: String!, $date: String!, $status: String!, $jou
 }
 `
 
-export { get, testQuery, updateRecord, fetchJournalData, fetchJournalsByUser };
+const postJournal = gql`
+mutation($userID: String, $name: String, $keys:[String], $colors:[String]) {
+    postJournalNew(userID: $userID, name: $name, keys: $keys, colors: $colors) {
+        createdOn
+        name
+        keys
+        colors
+        userID
+    }
+}
+`
+
+export { get, testQuery, updateRecord, fetchJournalData, fetchJournalsByUser, postJournal };

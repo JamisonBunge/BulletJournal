@@ -7,7 +7,9 @@ const journalSchema = new Schema({
 
     //ID is done by atlas
     name: String,
+    _id: Schema.Types.ObjectId,
     keys: [String],
+    colors: [String],
     userID: String,
     createdOn: String,
     journalID: String

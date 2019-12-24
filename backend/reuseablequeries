@@ -39,6 +39,7 @@ mutation {
     createdOn
     name
     journalID
+    _id
     userID
   }
 }

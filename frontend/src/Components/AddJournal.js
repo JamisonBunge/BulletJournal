@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { graphql, Mutation } from 'react-apollo'
+import { postJournal } from '../Queries/query'
 
 
 class AddJournal extends Component {
@@ -17,6 +19,7 @@ class AddJournal extends Component {
         // This binding is necessary to make `this` work in the callback
         this.handleClick = this.handleClick.bind(this);
         this.handleAddKey = this.handleAddKey.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleClick() {
@@ -34,8 +37,6 @@ class AddJournal extends Component {
     }
 
     listKeys() {
-
-
 
         let keys = [];
         for (let key in this.state.defaultKeys) {
@@ -65,6 +66,28 @@ class AddJournal extends Component {
 
     }
 
+    handleSubmit(e) {
+        e.preventDefault();
+        let keys = this.state.custom ? this.state.customKeys : this.state.defaultKeys;
+        let colors = this.state.custom ? this.state.defaultColors : this.state.defaultColors;
+        let name = e.target.form[0].value
+        let userID = this.props.userID
+
+        console.log(e.target.form[0].value)
+        console.log(this.props.userID)
+
+        this.props.postJournal({
+            variables: {
+                name: name.toString(),
+                keys: keys,
+                colors: colors,
+                userID: userID.toString(),
+            }
+        })
+
+        this.props.closePopup();
+    }
+
     render() {
         return (
             <div className='popup'>
@@ -76,26 +99,27 @@ class AddJournal extends Component {
                         <label>KEYS: </label>
                         <input type="radio" name="keyType" value="default" onClick={this.handleClick} checked={!this.state.custom} />Default Keys
                         <input type="radio" name="keyType" value="custom" onClick={this.handleClick} /> Custom Keys
-                    </form>
+
                     <hr />
 
-                    {this.state.custom ?
-                        //custom input html
-                        <div>
-                            <form>
-                                <p className="addjournal"> New Key</p>
-                                <label>Key Name: </label>
-                                <input type="text" name="name" /><br />
-                                <label>Key Color: </label><input type="color" name="legend" /><br />
-                                <button type="submit" onClick={this.handleAddKey}>ADD</button>
-                            </form>
-                            <hr />
-                            <ul className="keylist"> {this.listCustomKeys()}</ul>
-                        </div>
-                        : <ul className="keylist"> {this.listKeys()}</ul>
-                    }
-                    <button onClick={this.props.closePopup}>Create</button>
-                    <button onClick={this.props.closePopup}>Cancel</button>
+                        {this.state.custom ?
+                            //custom input html
+                            <div>
+                                <form>
+                                    <p className="addjournal"> New Key</p>
+                                    <label>Key Name: </label>
+                                    <input type="text" name="name" /><br />
+                                    <label>Key Color: </label><input type="color" name="legend" /><br />
+                                    <button type="submit" onClick={this.handleAddKey}>ADD</button>
+                                </form>
+                                <hr />
+                                <ul className="keylist"> {this.listCustomKeys()}</ul>
+                            </div>
+                            : <ul className="keylist"> {this.listKeys()}</ul>
+                        }
+                        <button type="submit" onClick={this.handleSubmit}>Create</button>
+                        <button onClick={this.props.closePopup}>Cancel</button>
+                    </form>
                 </div>
             </div>
         );
@@ -103,4 +127,5 @@ class AddJournal extends Component {
 }
 
 
-export default AddJournal
+//export default AddJournal
+export default graphql(postJournal, { name: "postJournal" })(AddJournal);
