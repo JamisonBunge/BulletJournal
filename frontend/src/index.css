@@ -1,10 +1,18 @@
 body {
-  margin: 0;
+  margin:0;
+  padding:0;
+  height: 100%;
+  background: #e8f7ff;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+html {
+  margin:0;
+  padding:0;
+
 }
 
 code {
@@ -21,14 +29,41 @@ code {
 }
 
 #grid {
-    border: 3px solid rgb(0, 0, 0);
 
+  background: #f3f3f3;
+  position: absolute;
+  overflow: hidden;
+  border: 3px solid rgb(0, 0, 0);
+  width:50%;
+  top:2.5%;
+  bottom:2.5%;
+  left: 70%;
+
+  transform: translate(-50%, 0);
 }
 
-#grid tr, td, th {
-    /* border: 20px solid rgb(0, 0, 0); */
-    outline: 1px solid
+#grid th {
+  width:20px;
+  background: #9cb6df;
+  outline: 1px solid black;
 }
+#grid h6 {
+  padding: 0;
+  margin: 0;
+}
+#grid tr {
+    width:20px;
+    height:5px;
+    overflow:hidden;
+    outline: 1px solid black;
+}
+#grid td {
+  width:20px;
+
+  overflow:hidden;
+  outline: 1px solid black;
+}
+
 
 .black {
   background: black;;
@@ -46,9 +81,10 @@ code {
 
 .sidebar {
   margin: 0;
+  top: 0px;
   padding: 0;
-  width: 100px;
-  background-color: #1935b1;
+  width: 125px;
+  background-color: #4c87e6;
   position: fixed;
   height: 100%;
   overflow: auto;
@@ -56,8 +92,24 @@ code {
 }
 
 .page {
-  margin-left:120px;
+  top:2%;
+  width:85%;
+  left:2.6%;
+
+  bottom:2%;
+  /* left: 100px; */
+  position: fixed;
+  margin-left:135px;
+  margin-top:0px;
+  margin-bottom: 0px;
+  margin-right: 0px;
+  padding: 0;
   background: #f3f3f3;
+  background: rgb(251,240,201);
+  border:4px solid black;
+  overflow: scroll;
+
+  /* transform: translate(-50%, 50%); */
 }
 
 .addJournal {
@@ -118,6 +170,19 @@ code {
   margin: auto;
   background-color: rgba(0,0,0, 0.5);
   background:  rgba(0,0,0, 0.5);
+}
+.page-main {
+  margin: 0;
+  padding: 0;
+  background: rgb(251,240,201);
+
+}
+.page-root {
+  margin: 0;
+  padding: 0;
+  background: #b7cae8;
+  height:100%;
+  width: 100%;
 }
 .popup_inner {
   position: absolute;

@@ -4,18 +4,18 @@ import { fetchJournalData } from '../Queries/query'
 import { graphql } from 'react-apollo';
 
 let months = [
-    { id: 1, "name": "January" },
-    { id: 2, "name": "Febuary" },
-    { id: 3, "name": "March" },
-    { id: 4, "name": "April" },
+    { id: 1, "name": "Jan" },
+    { id: 2, "name": "Feb" },
+    { id: 3, "name": "Mar" },
+    { id: 4, "name": "Apr" },
     { id: 5, "name": "May" },
-    { id: 6, "name": "June" },
-    { id: 7, "name": "July" },
-    { id: 8, "name": "August" },
-    { id: 9, "name": "September" },
-    { id: 10, "name": "October" },
-    { id: 11, "name": "November" },
-    { id: 12, "name": "December" },
+    { id: 6, "name": "Jun" },
+    { id: 7, "name": "Jul" },
+    { id: 8, "name": "Aug" },
+    { id: 9, "name": "Sep" },
+    { id: 10, "name": "Oct" },
+    { id: 11, "name": "Nov" },
+    { id: 12, "name": "Dec" },
 ];
 
 class YearCollection extends Component {
@@ -48,7 +48,7 @@ class YearCollection extends Component {
         let buildRow = (rowId) => {
 
             let cells = []
-            cells.push(<td>{rowId}</td>)
+            cells.push(<td><h6>{rowId}</h6></td>)
             let data = this.props.data.journalData;
 
             for (let col = 1; col < 13; col++) {
@@ -75,11 +75,11 @@ class YearCollection extends Component {
                     tableCell = <td id={frontEndID} className="black">  </td>
                 } else if (cellData) {
                     tableCell = <td id={frontEndID}>
-                        <Cell info={cellData} fullDate={dateForCell} />
+                        <Cell colors={this.props.colors} keys={this.props.keys} info={cellData} fullDate={dateForCell} />
                     </td>
                 } else {
                     tableCell = <td id={frontEndID}>
-                        <Cell info={info} fullDate={dateForCell} />
+                        <Cell colors={this.props.colors} keys={this.props.keys} info={info} fullDate={dateForCell} />
                     </td>
                 }
 
@@ -91,10 +91,10 @@ class YearCollection extends Component {
         //special build row for headers of the month
         let buildHeader = () => {
             let header = [];
-            header.push(<th>Day #</th>)
+            header.push(<th><h6>Day #</h6></th>)
 
             for (let month of months) {
-                header.push(<th id={`month-${month.id}`}>{month.name}</th>)
+                header.push(<th id={`month-${month.id}`}><h6>{month.name}</h6></th>)
             }
             return header;
         }
@@ -117,7 +117,7 @@ class YearCollection extends Component {
 
             return (
                 <div className="collection">
-                    <h1>{this.props.journalID}</h1>
+                    {/* <h1>{this.props.journalID}</h1> */}
                     <table id="grid">
                         <tbody>{this.buildTable()}</tbody>
                     </table>

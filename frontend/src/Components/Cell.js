@@ -16,10 +16,15 @@ class Cell extends Component {
         this.state = {
             info: this.props.info,
             status: this.props.info.status,
-            color: { background: colors[status] },
+            colors: this.props.colors,
+            color: { background: this.props.colors[status] },
         }
         // This binding is necessary to make `this` work in the callback
         this.handleClick = this.handleClick.bind(this);
+    }
+
+    getColor(val) {
+        return this.state.colors[val];
     }
 
     handleClick(e) {
@@ -28,9 +33,9 @@ class Cell extends Component {
         e.preventDefault();
         //console.log((this.state.status + 1) % 3)
 
-        let x = ((this.state.status + 1) % 3)
+        let x = ((this.state.status + 1) % this.state.colors.length)
         this.setState({ status: x })
-        this.setState({ color: { background: getColor(x) } })
+        this.setState({ color: { background: this.getColor(x) } })
         //console.log(`${this.state.status} is ${this.state.color}`)
         console.log(this.state.info)
 

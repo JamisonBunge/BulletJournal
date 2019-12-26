@@ -12,6 +12,10 @@ class Wrapper extends Component {
         console.log(this.props)
         this.state = {
             _id: "",
+            journal: {},
+            name: "",
+            keys: [],
+            colors: [],
             showPopUp: false
 
         }
@@ -31,8 +35,13 @@ class Wrapper extends Component {
         console.log(e.target.id)
 
         if (this.state._id != e.target.id) {
-            this.setState({ _id: e.target.id })
+            this.setState({
+                _id: e.target.id,
+                journal: this.props.data.journalsFor.find(obj => obj._id == e.target.id)
+            })
         }
+
+        console.log(this.state.journal)
 
 
         // if (this.state.journalID == undefined) {
@@ -75,7 +84,7 @@ class Wrapper extends Component {
 
             console.log("wrapper re-rendered")
             return (
-                <div>
+                <div className="page-root">
                     <div className="sidebar">
                         <div className="userCircle">Jami</div>
                         <div className="addJournal" onClick={this.togglePopup.bind(this)}>+</div>
@@ -85,7 +94,10 @@ class Wrapper extends Component {
                         {
                             this.state._id == "" ?
                                 <h1>Click a jounral </h1>
-                                : <Page journalID={this.state._id} />
+                                : <Page journalID={this.state._id}
+                                    name={this.state.journal.name}
+                                    keys={this.state.journal.keys}
+                                    colors={this.state.journal.colors} />
                         }
                     </div>
 

@@ -69,7 +69,7 @@ class AddJournal extends Component {
     handleSubmit(e) {
         e.preventDefault();
         let keys = this.state.custom ? this.state.customKeys : this.state.defaultKeys;
-        let colors = this.state.custom ? this.state.defaultColors : this.state.defaultColors;
+        let colors = this.state.custom ? this.state.customColors : this.state.defaultColors;
         let name = e.target.form[0].value
         let userID = this.props.userID
 

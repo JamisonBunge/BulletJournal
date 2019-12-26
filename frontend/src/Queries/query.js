@@ -30,6 +30,8 @@ query($userID: String!) {
         journalID
         _id
         userID
+        colors
+        keys
     }
 }`
 
