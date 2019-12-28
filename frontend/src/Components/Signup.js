@@ -10,34 +10,33 @@ import {
 } from "react-router-dom";
 
 
-class Login extends Component {
+class SignUp extends Component {
     constructor(props) {
         super(props);
         this.handleClick.bind(this.handleClick)
     }
     handleClick(e) {
-        // e.preventDefault();
+        e.preventDefault();
     }
 
     render() {
         return (
-            <div className="login-main">
+            <div className="signup-main">
                 <form>
                     <h1>Untitled Tracker</h1>
+                    <label>First Name</label><br />
+                    <input type="text" name="firstName" /><br />
+                    <label>Last Name</label><br />
+                    <input type="text" name="lastName" /><br />
                     <label>Email</label><br />
                     <input type="text" name="email" /><br />
                     <label>Password</label><br />
                     <input type="password" name="password" /><br />
-                    <button type="submit" onClick={this.handleClick}>LOGIN</button>
-                    <a href="/signup" ><p>New user? Sign Up</p></a>
-                    {/* <Router><Link to="/signup"><p>New user? Sign Up</p></Link>
-                        <Switch><Route path="/signup"></Route></Switch>
-                    </Router> */}
-                    {/* <a href="/signup" >asf</a> */}
-
+                    <button type="submit" onClick={this.handleClick}>SIGNUP</button>
+                    <a href="/login" ><p>Have an account? Log in!</p></a>
                 </form>
             </div>
         )
     }
 }
-export default Login
+export default SignUp

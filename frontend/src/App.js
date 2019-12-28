@@ -10,6 +10,7 @@ import {
 import './index.css';
 import Wrapper from './Components/Wrapper'
 import Login from './Components/Login'
+import SignUp from './Components/Signup'
 import { HttpLink } from 'apollo-link-http';
 import { ApolloClient } from 'apollo-client';
 
@@ -61,12 +62,16 @@ class App extends Component {
                     <div className="App" >
                         <Link to="/dash"></Link>
                         <Link to="/login"></Link>
+                        <Link to="/signup"></Link>
                         <Switch>
                             <Route path="/dash">
                                 <Wrapper />
                             </Route>
                             <Route path="/login">
                                 <Login />
+                            </Route>
+                            <Route path="/signup">
+                                <SignUp />
                             </Route>
                         </Switch>
                     </div>

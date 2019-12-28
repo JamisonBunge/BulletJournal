@@ -176,6 +176,7 @@ code {
   padding: 0;
   background: rgb(251,240,201);
 
+
 }
 .page-root {
   margin: 0;
@@ -225,6 +226,45 @@ code {
   transform: translateY(-50%);
 }
 
+.login-main {
+  position: relative;
+  text-align: center;;
+  background:#9cb6df;
+  position: fixed;
+  width: 25%;
+  height: 50%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+
+
+  border-radius: 10px;
+}
+
+.login-main input {
+  width:90%;
+  height:20px;
+  margin: 5px;
+  border-radius: 10px;
+  background:#f3f3f3;
+}
+.login-main button {
+  margin: 10px;
+  height:30px;
+  width: 60px;
+  /* border: 6px; */
+  border-radius: 10px;
+}
+
+.login-main p {
+
+  position: absolute;
+  bottom:5px;
+  left:50%;
+  transform: translate(-50%, 0);
+}
 /* This div is decisive for the whole thing's height.
  * Since the legend is positioned in an absolute way, we need to make
  * room for it by moving this div to the right (margin-left)
@@ -238,4 +278,45 @@ code {
 .addjournal h3 {
   padding: 0px;
   margin:0px;
+}
+
+
+.signup-main {
+  position: relative;
+  text-align: center;;
+  background:#9cb6df;
+  position: fixed;
+  width: 25%;
+  height: 60%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+
+
+  border-radius: 10px;
+}
+
+.signup-main input {
+  width:90%;
+  height:20px;
+  margin: 5px;
+  border-radius: 10px;
+  background:#f3f3f3;
+}
+.signup-main button {
+  margin: 10px;
+  height:30px;
+  width: 60px;
+  /* border: 6px; */
+  border-radius: 10px;
+}
+
+.signup-main p {
+
+  position: absolute;
+  bottom:5px;
+  left:50%;
+  transform: translate(-50%, 0);
 }
