@@ -43,3 +43,30 @@ mutation {
     userID
   }
 }
+
+mutation{
+  postUser(firstName:"Alex", lastName: "Dietzen",
+  email:"atd242@fredonia.edu",password:"badpassword") {
+    _id
+    firstName
+    lastName
+    email
+    password
+  }
+}
+
+{
+  login(email:"jjb220@columbia.edu", password:"badpassword")
+  {
+    token
+    tokenExpiration
+  }
+}
+
+
+mutation{
+  postUser(firstName:"Alec" lastName:"Amberose" email:"alec@gmail.com" password:"test") {
+    _id
+    email
+  }
+}

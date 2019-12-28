@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
 import { ApolloProvider } from 'react-apollo'
 import { InMemoryCache } from 'apollo-cache-inmemory';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+} from "react-router-dom";
 import './index.css';
 import Wrapper from './Components/Wrapper'
+import Login from './Components/Login'
 import { HttpLink } from 'apollo-link-http';
 import { ApolloClient } from 'apollo-client';
 
@@ -50,10 +57,20 @@ class App extends Component {
 
         return (
             <ApolloProvider client={client}>
-                <div className="App" >
-                    {/* <button type="input" onClick={setValue}>######################</button> */}
-                    <Wrapper />
-                </div>
+                <Router>
+                    <div className="App" >
+                        <Link to="/dash"></Link>
+                        <Link to="/login"></Link>
+                        <Switch>
+                            <Route path="/dash">
+                                <Wrapper />
+                            </Route>
+                            <Route path="/login">
+                                <Login />
+                            </Route>
+                        </Switch>
+                    </div>
+                </Router>
             </ApolloProvider>
         );
     }

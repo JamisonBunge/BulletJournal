@@ -3,6 +3,7 @@ import Cell from '../Components/Cell'
 import { fetchJournalData } from '../Queries/query'
 import { graphql } from 'react-apollo';
 
+
 let months = [
     { id: 1, "name": "Jan" },
     { id: 2, "name": "Feb" },
